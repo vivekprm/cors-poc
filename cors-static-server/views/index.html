@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Static Middleware Demo</title>
+  <script>
+    async function getData() {
+      fetch('http://localhost:8001/products/1', {
+        method: 'GET',
+      })
+        .then(res => res.text()) // or res.json()
+        .then(res => {
+          document.getElementById("get-data-field").innerText = res;
+          console.log(res);
+        })
+    }
+    function deleteData() {
+      fetch('http://localhost:8001/products/1', {
+        method: 'DELETE',
+      })
+        .then(res => res.text()) // or res.json()
+        .then(res => {
+          document.getElementById("delete-data-field").innerText = res;
+          console.log(res);
+        })
+    }
+    async function getCrossOriginData() {
+      fetch('http://localhost:8002', {
+        method: 'GET',
+      })
+        .then(res => res.text()) // or res.json()
+        .then(res => {
+          document.getElementById("get-cors-data-field").innerText = res;
+          console.log(res);
+        })
+    }
+    function deleteCrossOriginData() {
+      fetch('http://localhost:8002', {
+        method: 'DELETE',
+      })
+        .then(res => res.text()) // or res.json()
+        .then(res => {
+          document.getElementById("delete-cors-data-field").innerText = res;
+          console.log(res)
+        });
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Same Origin</h1>
+  <div>
+    <div>
+      <button href="#" onclick="getData();">Get same origin data!</button>
+    </div>
+    <p id="get-data-field"></p>
+  </div>
+  <div>
+    <div>
+      <button href="#" onclick="deleteData();">Delete same origin data!</button>
+    </div>
+    <p id="delete-data-field"></p>
+  </div>
+  <h1>Cross Origin</h1>
+  <div>
+    <div>
+      <button onclick="getCrossOriginData();">Get cross origin data!</button>
+    </div>
+    <p id="get-cors-data-field"></p>
+  </div>
+  <div>
+    <div>
+      <button onclick="deleteCrossOriginData();">Delete cross origin data!</button>
+    </div>
+    <p id="delete-cors-data-field"></p>
+  </div>
+</body>
+
+</html>
